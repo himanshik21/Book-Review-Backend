@@ -181,3 +181,4 @@ curl -X GET "http://localhost:3000/api/search?query=Gatsby&page=1&limit=10"
 4. Add image upload for book covers
 5. Implement user roles (admin, moderator)
 6. Add social features (like, share)
+# Book-Review-Backend
