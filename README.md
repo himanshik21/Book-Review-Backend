@@ -102,7 +102,7 @@ This project provides a complete RESTful API that enables users to register, log
 1. **Clone the repository**
    ```bash
    git clone https://github.com/himanshik21/Book-Review-Backend.git
-   cd book-review-api
+   cd book-review-backend
    ```
 
 2. **Install dependencies**
