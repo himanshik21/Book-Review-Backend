@@ -1,76 +1,97 @@
-# Book Review API
+# 📚 Book Review API
 
-A RESTful API built with Node.js and Express for a Book Review system.
+A RESTful API built with Node.js and Express for a comprehensive Book Review system.
 
-## Overview
+![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
 
-This project is a complete RESTful API that allows users to register, login, add books, write reviews, and search for books by title or author. It includes JWT authentication, pagination, and proper error handling.
+## 🔍 Overview
 
-## Technologies Used
+This project provides a complete RESTful API that enables users to register, login, add books, write reviews, and search for books by title or author. The API includes JWT authentication, pagination, and robust error handling.
 
-- Node.js
-- Express.js
-- MongoDB (with Mongoose ORM)
-- JWT for authentication
-- Joi for validation
-- bcryptjs for password hashing
+## ⚙️ Technologies Used
 
-## Features
+- **Node.js** - JavaScript runtime
+- **Express.js** - Web framework
+- **MongoDB** - NoSQL database (with Mongoose ORM)
+- **JWT** - JSON Web Tokens for authentication
+- **Joi** - Validation library
+- **bcryptjs** - Password hashing utility
 
-- User authentication (signup and login)
-- Book management (create, read)
-- Review system (create, update, delete)
-- Search functionality
-- Pagination
-- Error handling
-- Input validation
+## ✨ Features
 
-## Database Schema
+- 🔐 User authentication (signup and login)
+- 📖 Book management (create, read)
+- ⭐ Review system (create, update, delete)
+- 🔍 Search functionality
+- 📄 Pagination
+- ⚠️ Error handling
+- ✅ Input validation
+
+## 📊 Database Schema
 
 ### User Model
-- username: String (required, unique)
-- email: String (required, unique)
-- password: String (required, hashed)
-- timestamps: createdAt, updatedAt
+```
+{
+  username: String (required, unique),
+  email: String (required, unique),
+  password: String (required, hashed),
+  timestamps: { createdAt, updatedAt }
+}
+```
 
 ### Book Model
-- title: String (required)
-- author: String (required)
-- genre: String (required)
-- publishedYear: Number
-- description: String (required)
-- createdBy: ObjectId (reference to User)
-- timestamps: createdAt, updatedAt
+```
+{
+  title: String (required),
+  author: String (required),
+  genre: String (required),
+  publishedYear: Number,
+  description: String (required),
+  createdBy: ObjectId (reference to User),
+  timestamps: { createdAt, updatedAt }
+}
+```
 
 ### Review Model
-- text: String (required)
-- rating: Number (required, 1-5)
-- book: ObjectId (reference to Book)
-- user: ObjectId (reference to User)
-- timestamps: createdAt, updatedAt
+```
+{
+  text: String (required),
+  rating: Number (required, 1-5),
+  book: ObjectId (reference to Book),
+  user: ObjectId (reference to User),
+  timestamps: { createdAt, updatedAt }
+}
+```
 
-## API Endpoints
+## 🛣️ API Endpoints
 
 ### Authentication
-- POST /api/signup - Register a new user
-- POST /api/login - User login
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST   | `signup` | Register a new user |
+| POST   | `/login`  | User login |
 
 ### Books
-- POST /api/books - Add a new book (authenticated)
-- GET /api/books - Get all books with pagination
-  - Query parameters: page, limit, author, genre
-- GET /api/books/:id - Get book details by ID
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST   | `/books` | Add a new book (authenticated) |
+| GET    | `/books` | Get all books with pagination |
+| GET    | `/books/:id` | Get book details by ID |
 
 ### Reviews
-- POST /api/books/:id/reviews - Submit a review (authenticated)
-- PUT /api/reviews/:id - Update a review (owner only)
-- DELETE /api/reviews/:id - Delete a review (owner only)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST   | `/books/:id/reviews` | Submit a review (authenticated) |
+| PUT    | `/api/reviews/:id` | Update a review (owner only) |
+| DELETE | `/reviews/:id` | Delete a review (owner only) |
 
 ### Search
-- GET /api/search - Search books by title or author
-  - Query parameters: query, page, limit
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET    | `/search` | Search books by title or author |
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 - Node.js (v14 or higher)
@@ -78,27 +99,27 @@ This project is a complete RESTful API that allows users to register, login, add
 
 ### Installation
 
-1. Clone the repository
-   ```
+1. **Clone the repository**
+   ```bash
    git clone https://github.com/yourusername/book-review-api.git
    cd book-review-api
    ```
 
-2. Install dependencies
-   ```
+2. **Install dependencies**
+   ```bash
    npm install
    ```
 
-3. Create a .env file in the root directory with the following variables
+3. **Create a .env file in the root directory**
    ```
    PORT=3000
    MONGODB_URI=your_mongodb_connection_string
    JWT_SECRET=your_jwt_secret_key
-   JWT_EXPIRES_IN=7d
+   JWT_EXPIRES_IN=1d
    ```
 
-4. Start the server
-   ```
+4. **Start the server**
+   ```bash
    # Development mode
    npm run dev
    
@@ -106,65 +127,150 @@ This project is a complete RESTful API that allows users to register, login, add
    npm start
    ```
 
-## Example API Requests
+## 📝 Example API Requests
 
-### Register a new user
-```bash
-curl -X POST http://localhost:3000/api/signup \
-  -H "Content-Type: application/json" \
-  -d '{
-    "username": "testuser",
-    "email": "test@example.com",
-    "password": "password123"
-  }'
+### 1. Authentication
+
+#### 1.1 Signup
+**Endpoint:** `POST /signup`
+
+**Body (JSON):**
+```json
+{
+  "username": "himanshi123",
+  "email": "himanshi@example.com",
+  "password": "securepassword"
+}
 ```
 
-### Login
+**cURL:**
 ```bash
-curl -X POST http://localhost:3000/api/login \
-  -H "Content-Type: application/json" \
-  -d '{
-    "email": "test@example.com",
-    "password": "password123"
-  }'
+curl -X POST http://localhost:3000/signup \
+-H "Content-Type: application/json" \
+-d '{"username": "himanshi123", "email": "himanshi@example.com", "password": "securepassword"}'
 ```
 
-### Add a new book
-```bash
-curl -X POST http://localhost:3000/api/books \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -d '{
-    "title": "The Great Gatsby",
-    "author": "F. Scott Fitzgerald",
-    "genre": "Classic",
-    "publishedYear": 1925,
-    "description": "A novel about the American Dream..."
-  }'
+#### 1.2 Login
+**Endpoint:** `POST /login`
+
+**Body (JSON):**
+```json
+{
+  "email": "himanshi@example.com",
+  "password": "securepassword"
+}
 ```
 
-### Get all books
+**cURL:**
 ```bash
-curl -X GET "http://localhost:3000/api/books?page=1&limit=10&genre=Classic"
+curl -X POST http://localhost:3000/login \
+-H "Content-Type: application/json" \
+-d '{"email": "himanshi@example.com", "password": "securepassword"}'
 ```
 
-### Add a review
-```bash
-curl -X POST http://localhost:3000/api/books/BOOK_ID/reviews \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -d '{
-    "text": "This is a great book!",
-    "rating": 5
-  }'
+### 2. Books
+
+#### 2.1 Add a Book
+**Endpoint:** `POST /books`
+
+**Headers:**
+```
+Authorization: Bearer <your_token_here>
 ```
 
-### Search for books
-```bash
-curl -X GET "http://localhost:3000/api/search?query=Gatsby&page=1&limit=10"
+**Body (JSON):**
+```json
+{
+  "title": "The Great Gatsby",
+  "author": "F. Scott Fitzgerald",
+  "genre": "Fiction",
+  "description": "Classic novel"
+}
 ```
 
-## Design Decisions and Assumptions
+**cURL:**
+```bash
+curl -X POST http://localhost:3000/books \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer <your_token_here>" \
+-d '{"title": "The Great Gatsby", "author": "F. Scott Fitzgerald", "genre": "Fiction", "description": "Classic novel"}'
+```
+
+### 3. Reviews
+
+#### 3.1 Add Review
+**Endpoint:** `POST /books/:id/reviews`
+
+**Headers:**
+```
+Authorization: Bearer <your_token_here>
+```
+
+**Body (JSON):**
+```json
+{
+  "rating": 5,
+  "text": "Amazing book!"
+}
+```
+
+**cURL:**
+```bash
+curl -X POST http://localhost:3000/books/<bookId>/reviews \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer <your_token_here>" \
+-d '{"rating": 5, "text": "Amazing book!"}'
+```
+
+#### 3.2 Update Review
+**Endpoint:** `PUT /reviews/:id`
+
+**Headers:**
+```
+Authorization: Bearer <your_token_here>
+```
+
+**Body (JSON):**
+```json
+{
+  "rating": 4,
+  "text": "Updated review"
+}
+```
+
+**cURL:**
+```bash
+curl -X PUT http://localhost:3000/reviews/<reviewId> \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer <your_token_here>" \
+-d '{"rating": 4, "text": "Updated review"}'
+```
+
+#### 3.3 Delete Review
+**Endpoint:** `DELETE /api/reviews/:id`
+
+**Headers:**
+```
+Authorization: Bearer <your_token_here>
+```
+
+**cURL:**
+```bash
+curl -X DELETE http://localhost:3000/reviews/<reviewId> \
+-H "Authorization: Bearer <your_token_here>"
+```
+
+### 4. Search Books
+
+#### 4.1 Search by Title or Author
+**Endpoint:** `GET /search?query=great`
+
+**cURL:**
+```bash
+curl http://localhost:3000/search?query=great
+```
+
+## 🧩 Design Decisions and Assumptions
 
 1. **Authentication**: JWT-based authentication was chosen for its stateless nature and scalability.
 2. **Database**: MongoDB was selected for its flexibility with document-based data and ease of use with Node.js.
@@ -173,12 +279,6 @@ curl -X GET "http://localhost:3000/api/search?query=Gatsby&page=1&limit=10"
 5. **Validation**: Input validation using Joi to ensure data integrity.
 6. **One review per user per book**: Enforced by a compound index to maintain data quality.
 
-## Future Improvements
+## 📄 License
 
-1. Add unit and integration tests
-2. Implement rate limiting
-3. Add more advanced search and filtering capabilities
-4. Add image upload for book covers
-5. Implement user roles (admin, moderator)
-6. Add social features (like, share)
-# Book-Review-Backend
+This project is licensed under the MIT License - see the LICENSE file for details.
